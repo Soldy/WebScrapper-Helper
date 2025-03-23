@@ -1,11 +1,3 @@
-// ==UserScript==
-// @name      coolHelper
-// @namespace coolHelper
-// @match     *
-// @version   0.0.1
-// @grant     none
-// ==/UserScript==
-
 
 const CoolHelpClass = class{
     #scrollDown(){
