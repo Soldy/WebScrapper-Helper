@@ -57,28 +57,22 @@ const CoolHelpClass = class{
      * Smart click is clicking on the first child elements if they exist.
      * Click the main element if not.
      *
-     * Works with a priority list. That list should be changed to loop in the future.
+     * Works with a priority list.
      *
      * @public
      * @param {DOMElement}
     **/
     clickSmart(e){
-        if (
-          (typeof e.getElementsByTagName('button') != 'undefined') &&
-          (typeof e.getElementsByTagName('button')[0] != 'undefined')
-        ){
-             console.debug('CH: smart click to <button>')
-             e.getElementsByTagName('button')[0] != 'undefined')[0].click();
-             return ;
-        }
-        if (
-          (typeof e.getElementsByTagName('a') != 'undefined') &&
-          (typeof e.getElementsByTagName('a')[0] != 'undefined')
-        ){
-             console.debug('CH: smart click to <a>')
-             e.getElementsByTagName('a')[0] != 'undefined')[0].click();
-             return ;
-        }
+        const elements = ['a', 'button'];
+        for(const i of elements)
+            if (
+                (typeof e.getElementsByTagName(i) != 'undefined') &&
+                (typeof e.getElementsByTagName(i)[0] != 'undefined')
+             ){
+                 console.debug('CH: smart click to <'+i+'>')
+                 e.getElementsByTagName(i)[0].click();
+                 return ;
+             }
         console.debug('CH: smart click to main').click();
         e.click();
     }
