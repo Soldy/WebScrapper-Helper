@@ -56,6 +56,18 @@ const CoolHelpClass = class{
         return  d.innerText;
     }
     /**
+     * @param {DOMElement}
+     * @parram {Object.<string, string>} // {map<str, str>}
+     * @public
+     * @return {Object.<string. string>} // {map<str, str>}
+     **/
+     iTexts(e, selects_){
+         const out = {};
+         for (const i in selects_)
+             out[i] = this.iText(e, selects_[i]);
+        return out;
+    }
+    /**
      * Smart click is clicking on the first child elements if they exist.
      * Click the main element if not.
      *
