@@ -39,11 +39,13 @@ const CoolHelpClass = class{
     /**
      *
      * @param {DOMElement}
-     * @parram {strng}
+     * @parram {string}
      * @public
      * @return {string}
     **/
     iText(e, select_){
+        if (typeof e.querySelector === 'undefined')
+            return '';
         let d = e.querySelector(select_);
         if(typeof d === 'undefined' || d === null){
             d = e.getElementsByClassName(select_)[0];
