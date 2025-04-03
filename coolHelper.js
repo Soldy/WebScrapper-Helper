@@ -37,9 +37,10 @@ const CoolHelpClass = class{
         setTimeout(this.#scrollDownUp, 1000);
     }
     /**
+     * Multiple and special innerText case handler, helper, and shortener.
      *
      * @param {DOMElement}
-     * @parram {string}
+     * @param {string}
      * @public
      * @return {string}
     **/
@@ -56,15 +57,41 @@ const CoolHelpClass = class{
         return  d.innerText;
     }
     /**
+     * Multiple innerText Object helper.
+     *
      * @param {DOMElement}
-     * @parram {Object.<string, string>} // {map<str, str>}
+     * @param {Object.<string, string>} // {map<str, str>}
      * @public
      * @return {Object.<string. string>} // {map<str, str>}
-     **/
-     iTexts(e, selects_){
+    **/
+    iTexts(e, selects_){
          const out = {};
          for (const i in selects_)
              out[i] = this.iText(e, selects_[i]);
+        return out;
+    }
+    /**
+     * Multiple innerText Object helper from an array type object.
+     * The most common situation in web scraping is this.
+     *
+     * @param {Array[DOMElement]}
+     * @param {Object.<string, string>} // {map<str, str>}
+     * @public
+     * @return {Object.<string. string>} // {map<str, str>}
+    **/
+    iTextss(e, selects_){
+        const out = [];
+        for (const i in e){
+            const res = this.iTexts(e[i], selects_);
+            for (const v in res)
+                // No point in sending an empty element.
+                // So if all variables are empty
+                // we do not attache it. 
+                if ( res[v] !== ''){ 
+                    out.push(res);
+                    break;
+                }
+        }
         return out;
     }
     /**
