@@ -7,9 +7,9 @@
 
 /**
  *
- *
+ * @class
 **/
-const CoolHelpClass = class{
+const CoolHelperClass = class{
     /**
      * @private
     **/
@@ -79,10 +79,10 @@ const CoolHelpClass = class{
      * @public
      * @return {Object.<string. string>} // {map<str, str>}
     **/
-    iTextss(e, selects_){
+    iTextss(e_, selects_){
         const out = [];
-        for (const i in e){
-            const res = this.iTexts(e[i], selects_);
+        for (const i in e_){
+            const res = this.iTexts(e_[i], selects_);
             for (const v in res)
                 // No point in sending an empty element.
                 // So if all variables are empty
@@ -92,6 +92,22 @@ const CoolHelpClass = class{
                     break;
                 }
         }
+        return out;
+    }
+    /**
+     *
+     * 
+     * @param {DOMElement}
+     * @param {string} // @param {str}
+     * @public
+     * @return {Object.<string. string>} // {map<str, str>}
+    **/
+    iTerm(e_, term_, detail_){
+        const terms = e_.querySelectorAll(term_);
+        const details = e_.querySelectorAll(detail_);
+        let out = {};
+        for (let i = 0; terms.length > i; i++)
+            out[terms[i].innerText] = details[i].innerText;
         return out;
     }
     /**
