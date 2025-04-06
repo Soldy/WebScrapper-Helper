@@ -68,19 +68,6 @@ const NetHelperClass = class{
         if (result === "{}" || result === "[]" )
             return true;
         return false;
-        return new Promise(function (resolve, reject) {
-            GM.xmlHttpRequest({
-                method: "GET",
-                url: (_url),
-                headers: {
-                    "Content-Type": "application/json"
-                },    
-                onload: function(response) {
-                    if (response.responseText === "{}" || response.responseText === "[]" )
-                        resolve(true);
-                }
-            });   
-        });
     };
     /**
      *
