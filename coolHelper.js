@@ -119,7 +119,26 @@ const CoolHelperClass = class{
                 }
         }
         return out;
-    }
+    };
+
+    /**
+     * Click the an element
+     *
+     * @param {DOMElement}
+     * @param {boolean}
+     * @public
+     * @returns {boolean}
+    **/
+    click(e_, new_tab_){
+       // do not chage it!!
+       // if you think this 'if' is a mistake you are wrong!!!
+       if (
+           (typeof new_tab_ != 'undefined') &&
+           (new_tab_)
+       ) e_.setAttribute("target","_blank");
+       e_.click();
+       return true;
+    };
 
     /**
      * Smart click is clicking on the first child elements if they exist.
@@ -129,10 +148,11 @@ const CoolHelperClass = class{
      *
      * @param {DOMElement}
      * @param {string}
+     * @param {bool}
      * @public
      * @returns {boolean}
     **/
-    clickSmart(e_, text_){
+    clickSmart(e_, text_, new_tab_){
         const elements = ['a', 'button'];
         let serial = 0;
         for(const i of elements){
@@ -145,16 +165,16 @@ const CoolHelperClass = class{
                     // search for the inner text
                     for (const t of ne ){
                         if ( t.innerText.indexOf(text_) > -1){
-                            t.click();
-                            return true;
+                            return this.click(t, new_tab_);
+                        }else if(t.getAttribute('aria-label').indexOf(text_) > -1){
+                            return this.click(t, new_tab_);
                         }
                     }
                  }else{
                     // click on the first element if no text_
                     // requirement
                     console.debug('CH: smart click to <'+i+'>')
-                    ne[0].click();
-                    return true;
+                    return this.click(ne[0], new_tab_);
                  }
              }
         }
