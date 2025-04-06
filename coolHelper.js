@@ -127,21 +127,37 @@ const CoolHelperClass = class{
      *
      * Works with a priority list.
      *
-     * @public
      * @param {DOMElement}
+     * @param {string}
+     * @public
+     * @returns {boolean}
     **/
-    clickSmart(e){
+    clickSmart(e_, text_){
         const elements = ['a', 'button'];
-        for(const i of elements)
+        let serial = 0;
+        for(const i of elements){
+            const ne = e_.getElementsByTagName(i);
             if (
-                (typeof e.getElementsByTagName(i) != 'undefined') &&
-                (typeof e.getElementsByTagName(i)[0] != 'undefined')
+                (typeof ne != 'undefined') &&
+                (typeof ne[0] != 'undefined')
              ){
-                 console.debug('CH: smart click to <'+i+'>')
-                 e.getElementsByTagName(i)[0].click();
-                 return ;
+                 if (typeof text_ !== 'undefined'){
+                    // search for the inner text
+                    for (const t of ne ){
+                        if ( t.innerText.indexOf(text_) > -1){
+                            t.click();
+                            return true;
+                        }
+                    }
+                 }else{
+                    // click on the first element if no text_
+                    // requirement
+                    console.debug('CH: smart click to <'+i+'>')
+                    ne[0].click();
+                    return true;
+                 }
              }
-        console.debug('CH: smart click to main').click();
-        e.click();
+        }
+        return false;
     }
 };
