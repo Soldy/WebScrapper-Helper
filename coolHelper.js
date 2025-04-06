@@ -57,46 +57,7 @@ const CoolHelperClass = class{
         return  d.innerText;
     }
     /**
-     * Multiple innerText Object helper.
      *
-     * @param {DOMElement}
-     * @param {Object.<string, string>} // {map<str, str>}
-     * @public
-     * @return {Object.<string. string>} // {map<str, str>}
-    **/
-    iTexts(e, selects_){
-         const out = {};
-         for (const i in selects_)
-             out[i] = this.iText(e, selects_[i]);
-        return out;
-    }
-    /**
-     * Multiple innerText Object helper from an array type object.
-     * The most common situation in web scraping is this.
-     *
-     * @param {Array[DOMElement]}
-     * @param {Object.<string, string>} // {map<str, str>}
-     * @public
-     * @return {Object.<string. string>} // {map<str, str>}
-    **/
-    iTextss(e_, selects_){
-        const out = [];
-        for (const i in e_){
-            const res = this.iTexts(e_[i], selects_);
-            for (const v in res)
-                // No point in sending an empty element.
-                // So if all variables are empty
-                // we do not attache it. 
-                if ( res[v] !== ''){ 
-                    out.push(res);
-                    break;
-                }
-        }
-        return out;
-    }
-    /**
-     *
-     * 
      * @param {DOMElement}
      * @param {string} // @param {str}
      * @public
@@ -110,6 +71,56 @@ const CoolHelperClass = class{
             out[terms[i].innerText] = details[i].innerText;
         return out;
     }
+
+    /**
+     *
+     * @param {DOMElement}
+     * @param {string | Array.<string>} // @param {str | tuple<str, str>}
+     * @public
+     * @return {string | Object.<string, string>} // {str | map<str, str>}
+    **/
+    iSmart(e_, select_){
+        if (Array.isArray(select_))
+            return this.iTerm(e_, select_[0], select_[1]);
+        return this.iText(e_, select_);
+    }
+
+    /**
+     *
+     * @param {DOMElement}
+     * @param {Object.<string, string | Array.<string>>} // @param {map<str, str | tuple<str, str>>}
+     * @public
+     * @return {Object.<string, string | Object.<string, string>>} // {map<str, str | map<str, str>>}
+    **/
+    iTexts(e_, select_){
+        const out = {};
+        for (const i in selects_)
+            out[i] = this.iSmart(e, selects_[i]);
+        return out;
+    }
+    /**
+     *
+     * @param {Array.<DOMElement>}
+     * @param {Object.<string, string | Array.<string>>} // @param {map<str, str | tuple<str, str>>}
+     * @public
+     * @return {Array.<Object.<string, string | Object.<string, string>>>} // {vector<map<str, str | map<str, str>>>}
+    **/
+    iTextss(e_, select_){
+        const out = [];
+        for (const i in e_){
+            const res = this.iSmarts(e_[i], selects_);
+            for (const v in res)
+                // No point in sending an empty element.
+                // So if all variables are empty
+                // we do not attache it.
+                if ( res[v] !== ''){
+                    out.push(res);
+                    break;
+                }
+        }
+        return out;
+    }
+
     /**
      * Smart click is clicking on the first child elements if they exist.
      * Click the main element if not.
