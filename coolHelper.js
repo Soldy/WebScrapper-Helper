@@ -108,7 +108,7 @@ const CoolHelperClass = class{
     iTextss(e_, select_){
         const out = [];
         for (const i in e_){
-            const res = this.iSmarts(e_[i], selects_);
+            const res = this.iTexts(e_[i], selects_);
             for (const v in res)
                 // No point in sending an empty element.
                 // So if all variables are empty
