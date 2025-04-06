@@ -44,12 +44,12 @@ const CoolHelperClass = class{
      * @public
      * @return {string}
     **/
-    iText(e, select_){
-        if (typeof e.querySelector === 'undefined')
+    iText(e_, select_){
+        if (typeof e_.querySelector === 'undefined')
             return '';
-        let d = e.querySelector(select_);
+        let d = e_.querySelector(select_);
         if(typeof d === 'undefined' || d === null){
-            d = e.getElementsByClassName(select_)[0];
+            d = e_.getElementsByClassName(select_)[0];
         }
         if(typeof d === 'undefined' || d === null){
            return '';
@@ -92,10 +92,10 @@ const CoolHelperClass = class{
      * @public
      * @return {Object.<string, string | Object.<string, string>>} // {map<str, str | map<str, str>>}
     **/
-    iTexts(e_, select_){
+    iTexts(e_, selects_){
         const out = {};
         for (const i in selects_)
-            out[i] = this.iSmart(e, selects_[i]);
+            out[i] = this.iSmart(e_, selects_[i]);
         return out;
     }
     /**
@@ -105,7 +105,7 @@ const CoolHelperClass = class{
      * @public
      * @return {Array.<Object.<string, string | Object.<string, string>>>} // {vector<map<str, str | map<str, str>>>}
     **/
-    iTextss(e_, select_){
+    iTextss(e_, selects_){
         const out = [];
         for (const i in e_){
             const res = this.iTexts(e_[i], selects_);
