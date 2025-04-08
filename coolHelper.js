@@ -16,12 +16,14 @@ const CoolHelperClass = class{
     #scrollDown(){
         window.scrollTo(0, document.body.scrollHeight);
     }
+
     /**
      * @private
     **/
     #scrollUp(){
         window.scrollTo(0, 0);
     }
+
     /**
      * @private
     **/
@@ -29,6 +31,7 @@ const CoolHelperClass = class{
         setTimeout(this.#scrollDown, 100);
         setTimeout(this.#scrollUp, 200);
     }
+
     /**
      * @public
     **/
@@ -36,6 +39,23 @@ const CoolHelperClass = class{
         this.#scrollDownUp();
         setTimeout(this.#scrollDownUp, 1000);
     }
+
+    /**
+     *
+     * @param {DOMElement}
+     * @public
+     * @return {Array.<string>}
+    **/
+    smartList(e_){
+        if (e_.tagName.toLowerCase() !== 'ul')
+            return [e_.innerText.toString()];
+        const out = [];
+        const points = e_.getElementsByTagName('li');
+        for (const point of points)
+            out.push(point.innerText);
+        return out;
+    }
+
     /**
      * Multiple and special innerText case handler, helper, and shortener.
      *
@@ -56,6 +76,7 @@ const CoolHelperClass = class{
         }
         return  d.innerText;
     }
+
     /**
      *
      * @param {DOMElement}
@@ -145,6 +166,7 @@ const CoolHelperClass = class{
      * Click the main element if not.
      *
      * Works with a priority list.
+     * @todo Clean up! That has to be less ugly
      *
      * @param {DOMElement}
      * @param {string}
