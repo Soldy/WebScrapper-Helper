@@ -166,8 +166,12 @@ const CoolHelperClass = class{
                     for (const t of ne ){
                         if ( t.innerText.indexOf(text_) > -1){
                             return this.click(t, new_tab_);
-                        }else if(t.getAttribute('aria-label').indexOf(text_) > -1){
-                            return this.click(t, new_tab_);
+                        } else {
+                            const aria = t.getAttribute('aria-label');
+                            if (
+                              (aria != null ) &&
+                              (aria.indexOf(text_) > -1)
+                            ) return this.click(t, new_tab_);
                         }
                     }
                  }else{
