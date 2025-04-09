@@ -95,6 +95,50 @@ const CoolHelperClass = class{
 
     /**
      *
+     * @todo cleanup and separate
+     *
+     * @param {DOMElement}
+     * @param {string} // @param {str}
+     * @param {number} // @param {uint16_t}
+     * @public
+     * @return {Object.<string. string|Array.<string|Array.<string>>>} // {map<str, str|vector<str|vector<str>>>}
+    **/
+    iSection(e_, title_, i_){
+        const parent_e = e_[i_].parentElement;
+        const childs = parent_e.childNodes;
+        const titles = parent_e.querySelectorAll(title_);
+        let title_pos = 0;
+        let first = -1;
+        let last = -1;
+        let title = e_[i_].innerText.toString();
+        let sections = [];
+        for (const i in childs){
+            if (e_[i_] === childs[i])
+                first = parseInt(i)+1;
+        }
+        for (const i in titles){
+            if (titles[i] === e_)
+                title_pos = parseInt(i);
+        }
+        if (titles.count === title_pos+1){
+            last = childs.length;
+        } else {
+            const next_title = titles[title_pos+1];
+            for (let i = first ; i < childs.length ; i++){
+                if (childs[i] === next_title)
+                    last = parseInt(i);
+            }
+        }
+        for (let i = first ; i < last ; i++){
+            if (childs[i].innerText === '')
+                continue;
+            sections.push(this.smartList(childs[i]));
+        }
+        return {title,sections};
+    }
+
+    /**
+     *
      * @param {DOMElement}
      * @param {string | Array.<string>} // @param {str | tuple<str, str>}
      * @public
