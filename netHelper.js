@@ -22,6 +22,7 @@ const NetHelperClass = class{
      * @type {string} // @var {str}
     **/
     #url = '';
+
     /**
      *
      * @param {string} // @param {str}
@@ -29,7 +30,8 @@ const NetHelperClass = class{
     **/
     constructor(url_) {
         this.#url = (url_).toString();
-    } 
+    }
+
     /**
      *
      * @param {Object.<string, string|number>} // @param {map<str, str|int>}
@@ -56,6 +58,7 @@ const NetHelperClass = class{
             });
         });
     };
+
     /**
      *
      * @param {Object.<string, string|number>} // @param {map<str, str|int>}
@@ -69,6 +72,7 @@ const NetHelperClass = class{
             return true;
         return false;
     };
+
     /**
      *
      * @param {Object.<string, any>} // @param {map<str, str|int>}
@@ -93,15 +97,18 @@ const NetHelperClass = class{
             }); 
         });
     };
+
     /**
      *
-     * @param {Object.<string, string|number>} // @param {map<str, str|int>}
-     * @param {Object.<string, any>} // @param {map<str, str|int>}
+     * @param {Object.<string, string|number>}// {map<str, str|int>}
+     * @param {?Object.<string, string|number>}// {?map<str, str|int>}
      * @async
      * @public
-     * @returns {boolean}// @return {bool}
+     * @returns {boolean}// {bool}
     **/
     async checkAndAdd(query_, data_){
+       if ( typeof data_ === 'undefined' )
+           data_ = query_;
        const result = await this.check(query_); 
        if ( result )
           await this.add(data_);
