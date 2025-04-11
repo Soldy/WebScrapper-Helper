@@ -27,7 +27,7 @@ const ScrapperHelperClass = class{
     /**
      *
      * @param {DOMElement}
-     * @param {Object.<string, string | Array.<string>>} // @param {map<str, str | tuple<str, str>>}
+     * @param {ScrapMeta}
      * @param {string} // @param {str}
      * @public
     **/

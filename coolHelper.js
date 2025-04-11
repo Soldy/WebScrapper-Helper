@@ -6,6 +6,21 @@
 **/
 
 /**
+ * Data Scrapper meta type
+ * // {str | tuple<str, str> | map <str, str>}
+ *
+ *  @typedef {string | Array.<string> | Object.<string, string>} ScrapMetaPiece
+ *
+ **/
+
+/**
+ * Data Scrapper meta type
+ * // {map <str, ScrapMetaPiece>}
+ *
+ *  @typedef {Object.<string, ScrapMetaPiece>} ScrapMeta
+ *
+ **/
+/**
  *
  * @class
 **/
@@ -138,22 +153,66 @@ const CoolHelperClass = class{
     }
 
     /**
+     * get attribute simplifier
+     * @todo cleanup
      *
      * @param {DOMElement}
-     * @param {string | Array.<string>} // @param {str | tuple<str, str>}
+     * @param {Object.<string, string>}//{map<str,str>}
+     * @public
+     * @return {string}
+    **/
+    iAttr(e_, select_){
+        if ( typeof select_['e'] === 'undefined' )
+             if ( typeof select_['element'] === 'string' ) {
+                 select_['e'] = select_['element'];
+             } else {
+                 return '';
+             }
+        if ( typeof select_['a'] === 'undefined' )
+             if ( typeof select_['attr'] === 'string' ) {
+                 select_['a'] = select_['attr'];
+             } else if ( typeof select_['attribute'] === 'string' ) {
+                 select_['a'] = select_['attribute'];
+             } else {
+                 return '' 
+             }
+        if ( typeof e_.querySelector === 'undefined' )
+            return '';
+        let d = e_.querySelector(select_.e);
+        if ( typeof d === 'undefined' || d === null ){
+            d = e_.getElementsByClassName(select_.e)[0];
+        }
+        if ( typeof d === 'undefined' || d === null ){
+           return '';
+        }
+        const out = d.getAttribute(select_.a);
+        if ( out === null )
+            return '';
+        return out;
+    }
+
+    /**
+     *
+     * @param {DOMElement}
+     * @param {ScrapMetaPiece}
      * @public
      * @return {string | Object.<string, string>} // {str | map<str, str>}
     **/
     iSmart(e_, select_){
-        if (Array.isArray(select_))
+        if ( Array.isArray(select_) ){
             return this.iTerm(e_, select_[0], select_[1]);
+        } else if ( typeof select_ === 'object' ) {
+            for (const i in select_)
+                if ( ( i === 'attribute' ) || ( i === 'attr' ) || ( i === 'a' ) )
+                    return this.iAttr(e_, select_);
+        }
         return this.iText(e_, select_);
     }
 
     /**
      *
      * @param {DOMElement}
-     * @param {Object.<string, string | Array.<string>>} // @param {map<str, str | tuple<str, str>>}
+     * @param {ScrapMeta}
      * @public
      * @return {Object.<string, string | Object.<string, string>>} // {map<str, str | map<str, str>>}
     **/
@@ -166,7 +225,7 @@ const CoolHelperClass = class{
     /**
      *
      * @param {Array.<DOMElement>}
-     * @param {Object.<string, string | Array.<string>>} // @param {map<str, str | tuple<str, str>>}
+     * @param {ScrapMeta}
      * @public
      * @return {Array.<Object.<string, string | Object.<string, string>>>} // {vector<map<str, str | map<str, str>>>}
     **/
