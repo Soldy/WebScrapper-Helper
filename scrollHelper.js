@@ -1,16 +1,16 @@
 
 /**
  * @param {DOMElement}
- * @param {DOMElement}
+ * @param {string} //{str}
 **/
 
 const ScrollerHelperClass = function(holder_, list_element_){
     /** @type {DOMElement} **/
     const _e = holder_;
-    /** @type {DOMElement} **/
+    /** @type {string}//{str} **/
     const _list_element = list_element_;
     /** @type {number} //{uint16_t} **/
-    let _length = _list_element.length;
+    let _length = document.querySelectorAll(_list_element).length;
 
     let _resolve = (it)=>{console.log(it)};
     /** @type {number} //{uint16_t} **/
@@ -30,7 +30,7 @@ const ScrollerHelperClass = function(holder_, list_element_){
     const _check = function(){
         _e.scroll(0,0);
         setTimeout(function(){
-        const length = list_element_.length;
+        const length = document.querySelectorAll(_list_element).length;
         console.debug(
            'scroll helper check. Size : '+
            length.toString()+' '+
