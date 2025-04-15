@@ -10,8 +10,11 @@ is an easy-to-use web scrapper collection. The goal is to scrap a site with mini
   },
   'url', //data existance check element
   'http://anyserver/urls',
-  DOMElementToNextButton, 
-  'ButtonText'
+  {
+    'type'    : 'click',
+    'element' : DOMElementToNextButton,
+    'text'    : 'ButtonText'
+  }
 )).loop();
 
 

@@ -15,6 +15,7 @@
  * @param {Object.<string, string | Object<string, string>}
  * @param {string}
  * @param {string}
+ * @param {string}
  * @param {?NextMeta}
  * @class
 **/
