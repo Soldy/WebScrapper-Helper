@@ -27,7 +27,7 @@ const MinerHelperClass = function(element_, meta_, key_, url_, next_meta_, ){
      * @public
     **/
     this.mining = async function(){
-        return mining();
+        return _mining();
     };
 
     /**
@@ -37,7 +37,7 @@ const MinerHelperClass = function(element_, meta_, key_, url_, next_meta_, ){
     **/
     this.loop = function(){
         if (_next_meta['type'] === 'click')
-            return paginatorLoop();
+            return _paginatorLoop();
         return _scroll();
     };
 
@@ -48,43 +48,51 @@ const MinerHelperClass = function(element_, meta_, key_, url_, next_meta_, ){
      * @return {ScrapperHelperClass}
     **/
     this.sH = function(){
-        return sH; 
+        return _sH; 
     };
 
-    const sH = new ScrapperHelperClass(url_);
+    /** @type {ScrapperHelperClass} **/
+    const _sH = new ScrapperHelperClass(url_);
+    /** @type {MinerToolClass} **/
+    const _mT = new MinerToolClass('miner', 4000, 2000);
+    const _setRandOut = _mT.setRandOut;
+    const _log = _mT.log;
     /** @type {DOMElement} **/
     const _element = element_;
     /** @type {DOMElement} **/
-    const main_element = document.querySelectorAll(element_);
+    const _main_element = element_;
     /** @type {ScrapMeta} **/
-    const meta_tag = meta_;
+    const _meta_tag = meta_;
     /** @type {string} **/
-    const search_tag = key_;
+    const _search_tag = key_;
     /** @type {Object.<string, DOMElementi|string>} **/
     const _next_meta = next_meta_;
 
     /**
      *
      * @private
-     * @return {number}// {uint16_t}
     **/
-    const randWait = ()=>{
-        return (
-          10000 + Math.floor(Math.random() * 5000)
+    const _mining = async function(){
+        _log('mining', 'start');
+        await _sH.mineAndSave(
+          _main_element,
+          _meta_tag,
+          _search_tag
         );
+        _log('mining', 'done');
     };
-
+    
     /**
-     *
-     * @private
+    
+    
     **/
     const _click = function(){
-        if ( sH.cH.clickSmart(
+        if ( _sH.cH.clickSmart(
             _next_meta['element'],
             _next_meta['text']
           )
         ){
-            setTimeout(paginatorLoop, randWait());
+            _setRandOut(_paginatorLoop);
         };
     }
 
@@ -97,7 +105,7 @@ const MinerHelperClass = function(element_, meta_, key_, url_, next_meta_, ){
           _next_meta['element'],
           _element
         )).scroll();
-        setTimeout(mining, randWait());
+        _setRandOut(_mining);
     };
 
     /**
@@ -113,18 +121,10 @@ const MinerHelperClass = function(element_, meta_, key_, url_, next_meta_, ){
      *
      * @private
     **/
-    const mining = async function(){
-        await sH.mineAndSave(main_element, meta_tag, search_tag);
-    };
-
-    /**
-     *
-     * @private
-    **/
-    const paginatorLoop = async function(){
-        setTimeout(async function(){
-            await mining();
+    const _paginatorLoop = async function(){
+        _setRandOut(async function(){
+            await _mining();
             _next();
-        }, randWait());
+        });
     };
 };
