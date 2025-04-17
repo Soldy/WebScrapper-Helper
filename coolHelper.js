@@ -222,15 +222,19 @@ const CoolHelperClass = class{
             out[i] = this.iSmart(e_, selects_[i]);
         return out;
     }
+
     /**
      *
-     * @param {Array.<DOMElement>}
+     * @param {Array.<DOMElement> | string} // {str|vector<DOMElement>}
      * @param {ScrapMeta}
      * @public
      * @return {Array.<Object.<string, string | Object.<string, string>>>} // {vector<map<str, str | map<str, str>>>}
     **/
     iTextss(e_, selects_){
         const out = [];
+        // make it work with DOMElement and string
+        if (typeof e_ === 'string')
+            e_ = document.querySelectorAll(e_);
         for (const i in e_){
             const res = this.iTexts(e_[i], selects_);
             for (const v in res)
