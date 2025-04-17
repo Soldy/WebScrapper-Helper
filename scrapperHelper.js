@@ -4,6 +4,20 @@
  * @class
 **/
 const ScrapperHelperClass = class{
+
+    /**
+     * @type minerToolClass
+     * @private
+    **/ 
+    #mT = new MinerToolClass('scrapper', 4, 20);
+
+    /**
+     * @param {string}
+     * @param {string}
+     * @private
+    **/
+    #log = this.#mT.log;
+
     /**
      * @param {string} // @param {str}
      * @constructor
@@ -12,6 +26,7 @@ const ScrapperHelperClass = class{
         this.cH = new CoolHelperClass();
         this.nH = new NetHelperClass(url_);
     }
+
     /**
      *
      * @param {string}
@@ -24,6 +39,7 @@ const ScrapperHelperClass = class{
         search[id_] = data_[id_];
         return search;
     };
+
     /**
      *
      * @param {DOMElement}
@@ -32,8 +48,16 @@ const ScrapperHelperClass = class{
      * @public
     **/
     async mineAndSave(e_, meta_, id_){
+        console.log(e_);
         const mined = this.cH.iTextss(
           e_, meta_
+        );
+        this.#log('mineAndSave', 'mine done');
+        this.#log('mineAndSave',
+          (
+            'size : '+
+            mined.length.toString() 
+          )
         );
         for (const i of mined){
             await this.nH.checkAndAdd(
@@ -41,5 +65,6 @@ const ScrapperHelperClass = class{
               i
             );
         }
+        this.#log('mineAndSave','save done');
     }
 };
