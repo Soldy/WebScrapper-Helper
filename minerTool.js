@@ -1,9 +1,9 @@
 
 
 
-const minerToolClass = function(mod_, from_, plus_){
+const MinerToolClass = function(mod_, from_, plus_){
     /**
-      value check 
+      value check
     **/
     if (typeof from_ === 'undefined')
         from_ = 5000;
@@ -15,7 +15,7 @@ const minerToolClass = function(mod_, from_, plus_){
     const _from = parseInt(from_);
     /** @type {number}// {uint16_t} **/
     const _plus   = parseInt(plus_);
-  
+
     /**
      *
      * @param {?number}// {?uint16_t}
@@ -27,12 +27,12 @@ const minerToolClass = function(mod_, from_, plus_){
         if (typeof from_ === 'undefined')
             from_ = _from;
         if (typeof plus_ === 'undefined')
-            plus_ = _plus; 
+            plus_ = _plus;
         return (
           from_ + Math.floor(Math.random() * plus_)
         );
     };
-  
+
     /**
      *  Easy to detect a scrapperbot 
      *  if you searching for periodic events.
@@ -49,7 +49,7 @@ const minerToolClass = function(mod_, from_, plus_){
           _randWait(from_, plus_)
         );
     };
-  
+
     /**
      *
      * @param {function}
@@ -60,7 +60,7 @@ const minerToolClass = function(mod_, from_, plus_){
     this.setRandOut = function(func_, from_, plus_){
         return _setRandOut(func_, from_, plus_);  
     };
-  
+
     /**
      *
      * @param {string}
