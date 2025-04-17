@@ -21,77 +21,74 @@ const ScrollerHelperClass = function(holder_, list_element_){
     let _resolve = (it)=>{console.log(it)};
     /** @type {number} //{uint16_t} **/
     let _sVal = 0;
-    const cH = new CoolHelperClass();
-    /**
-     *  Easy to detect a scrapperbot 
-     *  if you searching for periodic events.
-     *  A random number generator made it difficult. 
-     *
-     * @private
-     * @return {number}// {uint16_t}
-    **/
-    const randWait = ()=>{
-        return (
-          2000 + Math.floor(Math.random() * 2000)
-        );
-    };
-    /**
-     *
-     * @private
-     **/
-    const _again = function (){
-        setTimeout(_do, randWait());
-    };
+    const _mT = new MinerToolClass('scroll', 4000, 2000);
+    const _setRandOut = _mT.setRandOut;
+    const _log = _mT.log;
+    const _cH = new CoolHelperClass();
     /**
      *
      * @private
      **/
     const _check = function(){
         _e.scroll(0,0);
-        setTimeout(function(){
+        _setRandOut(function(){
             const length = document.querySelectorAll(_list_element).length;
-            console.debug(
-              'scroll helper check. Size : '+
-              length.toString()+' '+
-              _length.toString()
+            _log(
+              'check', 
+              (
+                'Size : '+
+                length.toString()+
+                ' '+
+                _length.toString()
+              )
             );
             if ( length === _length ){
-                console.debug(
-                  'scroll helper done'
+                _log(
+                  'check','done'
                 );
                 return _resolve(true);
             }
             _length = length;
-            setTimeout(_again, randWait());
-        },randWait());
+            _setRandOut(_again);
+        });
     }
     /**
      *
      * @private
      **/
     const _do = async function(){
-        await cH.scroll();
+        await _cH.scroll();
         _sVal += (
           10000 + Math.round(
             Math.random() * 20000
           )
         );
         _e.scroll(0,_sVal);
-        setTimeout(_check, randWait());
+        _setRandOut(_check);
     }
+    /**
+     *
+     * @private
+     **/
+    const _again = function (){
+        _setRandOut(_do);
+    };
     /**
      *
      * @public
      **/
     this.scroll = function(){
-        console.debug(
-          'scroll helper start. Size : '+
-          _length.toString()
+        _log(
+          'start',
+          (
+            'Size : '+
+            _length.toString()
+          )
         );
         const scr = this; 
         return new Promise(function (resolve, reject) {
             _resolve = resolve;
-            setTimeout(_do, randWait());
+            _setRandOut(_do);
         });
     }
 }
