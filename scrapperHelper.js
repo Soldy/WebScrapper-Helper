@@ -48,7 +48,6 @@ const ScrapperHelperClass = class{
      * @public
     **/
     async mineAndSave(e_, meta_, id_){
-        console.log(e_);
         const mined = this.cH.iTextss(
           e_, meta_
         );
