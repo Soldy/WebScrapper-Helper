@@ -55,7 +55,9 @@ const MinerHelperClass = function(element_, meta_, key_, url_, next_meta_, ){
     const _sH = new ScrapperHelperClass(url_);
     /** @type {MinerToolClass} **/
     const _mT = new MinerToolClass('miner', 4000, 2000);
+    /** @type {MinerToolClass.setRandOut} **/
     const _setRandOut = _mT.setRandOut;
+    /** @type {MinerToolClass.log} **/
     const _log = _mT.log;
     /** @type {DOMElement} **/
     const _element = element_;
@@ -81,10 +83,10 @@ const MinerHelperClass = function(element_, meta_, key_, url_, next_meta_, ){
         );
         _log('mining', 'done');
     };
-    
+
     /**
-    
-    
+     *
+     * @private
     **/
     const _click = function(){
         if ( _sH.cH.clickSmart(
@@ -124,7 +126,7 @@ const MinerHelperClass = function(element_, meta_, key_, url_, next_meta_, ){
     const _paginatorLoop = async function(){
         _setRandOut(async function(){
             await _mining();
-            _next();
+            _setRandOut(_next);
         });
     };
 };
