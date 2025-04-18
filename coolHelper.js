@@ -57,6 +57,18 @@ const CoolHelperClass = class{
 
     /**
      *
+     * @param {DOMElement|string}
+     * @public
+     * @return {DOMElement}
+    **/
+    elementCheck(e_){
+        if (typeof e_ !== 'string')
+            return e_;
+        return document.querySelector(e_);
+    }
+
+    /**
+     *
      * @param {DOMElement}
      * @public
      * @return {Array.<string>}
@@ -275,7 +287,7 @@ const CoolHelperClass = class{
      * Works with a priority list.
      * @todo Clean up! That has to be less ugly
      *
-     * @param {DOMElement}
+     * @param {DOMElement|string}
      * @param {string}
      * @param {bool}
      * @public
@@ -284,6 +296,7 @@ const CoolHelperClass = class{
     clickSmart(e_, text_, new_tab_){
         const elements = ['a', 'button'];
         let serial = 0;
+        e_ = this.elementCheck(e_);
         for(const i of elements){
             const ne = e_.getElementsByTagName(i);
             if (
