@@ -4,7 +4,9 @@
  *
  * @class
  **/
-const serialHelperClass = class{
+const SerialHelperClass = class{
+   /** @type {StorageHelperClass} **/
+   #sT = new  StorageHelperClass();
    /** @type {string} **/
    #name = '';
    /** @type {string} **/
@@ -28,7 +30,7 @@ const serialHelperClass = class{
      * @return {number}// {uint16_t}
     **/
     async get(){
-        return await GM.getValue(this.#sn, 0);
+        return await this.#sT.get(this.#sn, 0);
     };
 
     /**
@@ -38,8 +40,7 @@ const serialHelperClass = class{
     **/
     async step(){
         const val = await this.get();
-        await GM.setValue(this.#sn, (val+1));
+        await this.#sT.set(this.#sn, (val+1));
         return val;  
     };
 };
-

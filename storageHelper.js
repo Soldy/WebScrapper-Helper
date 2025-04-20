@@ -8,7 +8,7 @@
  * @param {?number} //{?uint8_t}
  * @class
 **/
-const storageHelperClass = class{
+const StorageHelperClass = class{
     /**
      * 0 = dummy storage
      * 1 = localStorage
