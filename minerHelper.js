@@ -36,6 +36,8 @@ const MinerHelperClass = function(element_, meta_, key_, url_, next_meta_, ){
      * @public
     **/
     this.loop = function(){
+        if (typeof _next_meta === 'undefined')
+            return _mining();
         if (_next_meta['type'] === 'click')
             return _paginatorLoop();
         return _scroll();
