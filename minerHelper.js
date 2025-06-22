@@ -1,3 +1,37 @@
+
+/**
+ * CallMeta
+ * {
+ *    "before" : <BeforeMeta>,
+ *    "next"   : <NextMeta>
+ *  }
+ *
+ * @typedef {Object.<string, BeforeMeta|NextMeta>
+**/
+
+/**
+ * BeforeMeta
+ * {
+ *    "type"    : "scroll|click",
+ *    "element" : <DOMElement>,
+ *    "text"    : <string>
+ *  }
+ *
+ * @typedef {Object.<string, DOMElement|string>} ScrapMeta
+**/
+
+
+/**
+ * NextMeta
+ * {
+ *    "type"    : "scroll|click",
+ *    "element" : <DOMElement>,
+ *    "text"    : <string>
+ *  }
+ *
+ * @typedef {Object.<string, DOMElement|string>} ScrapMeta
+**/
+
 /**
  * At some times we can realize the javascript class
  * is not always a comfortable object.
@@ -16,10 +50,10 @@
  * @param {string}
  * @param {string}
  * @param {string}
- * @param {?NextMeta}
+ * @param {?CallMeta}
  * @class
 **/
-const MinerHelperClass = function(element_, meta_, key_, url_, next_meta_, ){
+const MinerHelperClass = function(element_, meta_, key_, url_, call_meta_){
 
     /**
      * Unnecessary public gate for the mine function.
@@ -27,6 +61,7 @@ const MinerHelperClass = function(element_, meta_, key_, url_, next_meta_, ){
      * @public
     **/
     this.mining = async function(){
+        _before();
         return _mining();
     };
 
@@ -36,6 +71,7 @@ const MinerHelperClass = function(element_, meta_, key_, url_, next_meta_, ){
      * @public
     **/
     this.loop = function(){
+        _before();
         if (typeof _next_meta === 'undefined')
             return _mining();
         if (_next_meta['type'] === 'click')
@@ -52,6 +88,13 @@ const MinerHelperClass = function(element_, meta_, key_, url_, next_meta_, ){
     this.sH = function(){
         return _sH; 
     };
+    // pre constructor (backward comp)
+    if (typeof call_meta_ === 'undefined'){
+        call_meta_ = {}; 
+    }else if(typeof call_meta_['type'] !== 'undefined')
+        call_meta_ = {
+            "next" : call_meta_ 
+        };
 
     /** @type {ScrapperHelperClass} **/
     const _sH = new ScrapperHelperClass(url_);
@@ -69,8 +112,10 @@ const MinerHelperClass = function(element_, meta_, key_, url_, next_meta_, ){
     const _meta_tag = meta_;
     /** @type {string} **/
     const _search_tag = key_;
-    /** @type {Object.<string, DOMElementi|string>} **/
-    const _next_meta = next_meta_;
+    /** @type {BeforeMeta} **/
+    const _before_meta = call_meta_['before'];
+    /** @type {NextMeta} **/
+    const _next_meta = call_meta_['next'];
 
     /**
      *
@@ -90,6 +135,18 @@ const MinerHelperClass = function(element_, meta_, key_, url_, next_meta_, ){
      *
      * @private
     **/
+    const _before_click = function(){
+        if ( _before_meta['type'] === 'click')
+            _sH.cH.clickSmart(
+                _before_meta['element'],
+                _before_meta['text']
+            );
+    };
+
+    /**
+     *
+     * @private
+    **/
     const _click = function(){
         if ( _sH.cH.clickSmart(
             _next_meta['element'],
@@ -98,7 +155,21 @@ const MinerHelperClass = function(element_, meta_, key_, url_, next_meta_, ){
         ){
             _setRandOut(_paginatorLoop);
         };
-    }
+    };
+
+    /**
+     *
+     * @private
+    **/
+    const _click = function(){
+        if ( _sH.cH.clickSmart(
+            _next_meta['element'],
+            _next_meta['text']
+          )
+        ){
+            _setRandOut(_paginatorLoop);
+        };
+    };
 
     /**
      *
