@@ -11,9 +11,16 @@ is an easy-to-use web scrapper collection. The goal is to scrap a site with mini
   'url', //data existance check element
   'http://anyserver/urls',
   {
-    'type'    : 'click',
-    'element' : DOMElementToNextButton,
-    'text'    : 'ButtonText'
+    'Before' : {
+        'type'    : 'click',
+        'element' : DOMElement Before Button|Link|Event,
+        'text'    : 'ButtonText'
+    },
+    'next' : {
+        'type'    : 'click',
+        'element' : DOMElementToNextButton,
+        'text'    : 'ButtonText'
+    }
   }
 )).loop();
 
