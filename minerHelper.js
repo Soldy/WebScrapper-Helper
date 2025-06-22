@@ -131,6 +131,18 @@ const MinerHelperClass = function(element_, meta_, key_, url_, call_meta_){
         _log('mining', 'done');
     };
 
+
+   /**
+     *
+     * @private
+    **/
+    const _before = function(){
+        if (typeof _before_meta['type'] === 'undefined')
+            return;
+        if (_before_meta['type'] === 'click')
+            return _before_click();
+    };
+
     /**
      *
      * @private
@@ -141,20 +153,6 @@ const MinerHelperClass = function(element_, meta_, key_, url_, call_meta_){
                 _before_meta['element'],
                 _before_meta['text']
             );
-    };
-
-    /**
-     *
-     * @private
-    **/
-    const _click = function(){
-        if ( _sH.cH.clickSmart(
-            _next_meta['element'],
-            _next_meta['text']
-          )
-        ){
-            _setRandOut(_paginatorLoop);
-        };
     };
 
     /**
