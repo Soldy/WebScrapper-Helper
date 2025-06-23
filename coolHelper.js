@@ -48,6 +48,17 @@ const CoolHelperClass = class{
     }
 
     /**
+     * trim function
+     *
+     * @param {string}
+     * @public
+     * @return
+    **/
+    trim(input_) {
+        return input_.replace(/^\s+|\s+$/g, '');
+    }
+
+    /**
      * @public
     **/
     scroll(){
@@ -200,7 +211,7 @@ const CoolHelperClass = class{
         const out = d.getAttribute(select_.a);
         if ( out === null )
             return '';
-        return out;
+        return this.trim(out);
     }
 
     /**
