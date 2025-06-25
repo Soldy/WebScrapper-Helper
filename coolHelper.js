@@ -335,6 +335,11 @@ const CoolHelperClass = class{
                  }
              }
         }
+        try{
+            this.click(e_, new_tab_);
+        }catch(e){
+            console.debug(e);
+        }
         return false;
     }
 };
