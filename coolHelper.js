@@ -112,7 +112,7 @@ const CoolHelperClass = class{
         if(typeof d === 'undefined' || d === null){
            return '';
         }
-        return  d.innerText;
+        return this.trim(d.innerText);
     }
 
     /**
