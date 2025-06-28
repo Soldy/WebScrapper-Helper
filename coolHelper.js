@@ -99,10 +99,11 @@ const CoolHelperClass = class{
      *
      * @param {DOMElement|string}
      * @param {?string}
+     * @param {?number}
      * @public
      * @return {string}
     **/
-    iText(e_, select_){
+    iText(e_, select_, idx_){
         if (typeof select_ === 'undefined'){
             select_ = e_.toString();
             e_ = document;
@@ -112,6 +113,11 @@ const CoolHelperClass = class{
         let d = e_.querySelector(select_);
         if (typeof d === 'undefined' || d === null){
             d = e_.getElementsByClassName(select_)[0];
+        }
+        if (typeof idx_ === 'undefined'){
+            if (e_.querySelectorAll(select_).length > idx_){
+                d = e_.querySelectorAll(select_)[idx_];
+            }
         }
         if (typeof d === 'undefined' || d === null){
             return '';
