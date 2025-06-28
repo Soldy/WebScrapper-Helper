@@ -95,7 +95,7 @@ const CoolHelperClass = class{
     }
 
     /**
-     * Multiple and special innerText case handler, helper, and shortener.
+     * Multiple and special DOMElemet search
      *
      * @param {DOMElement|string}
      * @param {?string}
@@ -103,7 +103,7 @@ const CoolHelperClass = class{
      * @public
      * @return {string}
     **/
-    iText(e_, select_, idx_){
+    iDom(e_, select_, idx_){
         if (typeof select_ === 'undefined'){
             select_ = e_.toString();
             e_ = document;
@@ -119,12 +119,42 @@ const CoolHelperClass = class{
                 d = e_.querySelectorAll(select_)[idx_];
             }
         }
+        return d;
+    };
+
+    /**
+     * Multiple and special innerText case handler, helper, and shortener.
+     *
+     * @param {DOMElement|string}
+     * @param {?string}
+     * @param {?number}
+     * @public
+     * @return {string}
+    **/
+    iText(e_, select_, idx_){
+        const d = this.iDom(e_, select_, idx_);
         if (typeof d === 'undefined' || d === null){
             return '';
         }
         return this.trim(d.innerText);
     }
 
+    /**
+     * Multiple and special innerHTML case handler, helper, and shortener.
+     *
+     * @param {DOMElement|string}
+     * @param {?string}
+     * @param {?number}
+     * @public
+     * @return {string}
+    **/
+    iHtml(e_, select_, idx_){
+        const d = this.iDom(e_, select_, idx_);
+        if (typeof d === 'undefined' || d === null){
+            return '';
+        }
+        return this.trim(d.innerHTML);
+    }
     /**
      *
      * @param {DOMElement}
