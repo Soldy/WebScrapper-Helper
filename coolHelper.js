@@ -235,9 +235,29 @@ const CoolHelperClass = class{
         if ( Array.isArray(select_) ){
             return this.iTerm(e_, select_[0], select_[1]);
         } else if ( typeof select_ === 'object' ) {
-            for (const i in select_)
-                if ( ( i === 'attribute' ) || ( i === 'attr' ) || ( i === 'a' ) )
+            for (const i in select_){
+                if ( ( i === 'attribute' ) || ( i === 'attr' ) || ( i === 'a' ) ){
                     return this.iAttr(e_, select_);
+                }
+            }
+            if (
+              (( select_.indexOf('index') > -1 ) || ( select_.indexOf('idx') > -1  ) || ( select_.indexOf('i') > -1  )) &&
+              (( select_.indexOf('queryselector') > -1 ) || ( select_.indexOf('query') > -1  ) || ( select_.indexOf('q') > -1  ))
+            ){
+                if ( select_.indexOf('index') > -1 ){
+                    select_['i'] = select_['index'];
+                }
+                if ( select_.indexOf('idx') > -1  ){
+                    select_['i'] = select_['idx'];
+                }
+                if ( select_.indexOf('queryselector') > -1 ){
+                    select_['q'] = select_['queryselector'];
+                }
+                if ( select_.indexOf('query') > -1  ){
+                    select_['q'] = select_['query'];
+                }
+                return (e_, select_['q'], select_['i']);
+            }
         }
         return this.iText(e_, select_);
     }
