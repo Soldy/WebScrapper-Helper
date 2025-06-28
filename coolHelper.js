@@ -97,20 +97,24 @@ const CoolHelperClass = class{
     /**
      * Multiple and special innerText case handler, helper, and shortener.
      *
-     * @param {DOMElement}
-     * @param {string}
+     * @param {DOMElement|string}
+     * @param {?string}
      * @public
      * @return {string}
     **/
     iText(e_, select_){
+        if (typeof select_ === 'undefined'){
+            select_ = e_.toString();
+            e_ = document;
+        }
         if (typeof e_.querySelector === 'undefined')
             return '';
         let d = e_.querySelector(select_);
-        if(typeof d === 'undefined' || d === null){
+        if (typeof d === 'undefined' || d === null){
             d = e_.getElementsByClassName(select_)[0];
         }
-        if(typeof d === 'undefined' || d === null){
-           return '';
+        if (typeof d === 'undefined' || d === null){
+            return '';
         }
         return this.trim(d.innerText);
     }
