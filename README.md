@@ -44,11 +44,16 @@ Each function can return text, HTML code, attribution, or a combination list (ma
 
 The primary goal is to build a list of query selectors and return their corresponding values if they exist. If a particular value does not exist, the function should return an empty string. Simple, right? 
 
-### iDom
 I really like the query selector feature, but it has some limitations and can be quite complex.
 One of the main issues is that it returns null if an element does not exist. While that is acceptable, it can lead to errors when attempting to interact with that element.
 This issue means you end up writing extra lines of code to handle it. If you need five additional lines just to retrieve the content, that doesn’t feel efficient. 
 It’s not a major problem, but it can complicate things unnecessarily.
+
+
+### iDom
+
+iDom mostly a short hand.
+iDom is the expectation the empty string rule if the element does not exist, it will return null.
 
 ```javascript
 
@@ -74,7 +79,6 @@ const cH = new CoolHelperClass();
 const iDom = cH.iDom;
 iDom(iDom('.class'), 'li', 2); //return DOMElement equal with document.queryselector('.class').queryselectorAll('li')[2]
 ```
-iDom is the expectation the empty string rule is that if the element does not exist, it will return null.
 
 ## Personal Note
 
