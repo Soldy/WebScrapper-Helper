@@ -33,10 +33,11 @@ Compatible with [Greasemonkey](https://www.greasespot.net/) and [simple_scrapper
 <!-- It's undetectable for F5, Impreva, Cloudflare, DataDome, Reblaze, and Radware.
 However, if you do a volume scrapping they can catch you anyway.  -->
 
-The simple scrapper, WebScrapper Helper, and Anyserver together already the 4th most powerful web scrapper that I built alone.
-(Yes,  I built 3 others that were more powerful,  plus I worked with a team that built better things. But still, this is a good stuff.)
-I haven't see any open-source tools at a similar level, which is why I decided to publish it.
-I have limited time, so any assistance would be appreciated.
 
+## Personal Note
 
+I built the WebScrapper Helper, and along with Anyserver, it the fourth most powerful web scraper I've developed on my own.
+(I've created three other scrapers that are more powerful, and I also collaborated with a team on even better projects.
+It's no surprise that I'm not the smartest person in the room, but I still believe this is a solid tool.)
+I haven't come across any open-source tools of a similar caliber, which is why I decided to publish it. Since I have limited time, any assistance would be greatly appreciated.
 
