@@ -1,7 +1,7 @@
 /**
  *  coolHelper is a simplified version of the old helper class
- *  that was used in the scrapper script built in 2021. 
- *  It's not good but make the code shorter. 
+ *  that was used in the scrapper script built in 2021.
+ *  It's not good but make the code shorter.
  *
 **/
 
@@ -95,13 +95,14 @@ const CoolHelperClass = class{
     }
 
     /**
-     * Multiple and special DOMElemet search
+     * iDom mostly a query selector short hand and
+     * is the expectation the empty string rule if the element does not exist, it will return null.
      *
      * @param {DOMElement|string}
      * @param {?string}
      * @param {?number}
      * @public
-     * @return {string}
+     * @return {DOMElement|null}
     **/
     iDom(e_, select_, idx_){
         if (typeof select_ === 'undefined'){
@@ -137,7 +138,7 @@ const CoolHelperClass = class{
             return '';
         }
         return this.trim(d.innerText);
-    }
+    };
 
     /**
      * Multiple and special innerHTML case handler, helper, and shortener.
@@ -154,7 +155,8 @@ const CoolHelperClass = class{
             return '';
         }
         return this.trim(d.innerHTML);
-    }
+    };
+
     /**
      *
      * @param {DOMElement}
@@ -166,10 +168,11 @@ const CoolHelperClass = class{
         const terms = e_.querySelectorAll(term_);
         const details = e_.querySelectorAll(detail_);
         let out = {};
-        for (let i = 0; terms.length > i; i++)
+        for (let i = 0; terms.length > i; i++){
             out[terms[i].innerText] = details[i].innerText;
+        }
         return out;
-    }
+    };
 
     /**
      *
@@ -213,7 +216,7 @@ const CoolHelperClass = class{
             sections.push(this.smartList(childs[i]));
         }
         return {title,sections};
-    }
+    };
 
     /**
      * get attribute simplifier
@@ -252,7 +255,7 @@ const CoolHelperClass = class{
         if ( out === null )
             return '';
         return this.trim(out);
-    }
+    };
 
     /**
      *
@@ -290,7 +293,7 @@ const CoolHelperClass = class{
             }
         }
         return this.iText(e_, select_);
-    }
+    };
 
     /**
      *
@@ -401,5 +404,5 @@ const CoolHelperClass = class{
             console.debug(e);
         }
         return false;
-    }
+    };
 };
