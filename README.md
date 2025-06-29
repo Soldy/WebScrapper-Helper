@@ -69,7 +69,7 @@ If the core element is not the document element that needs to be included, then 
 ```javascript
 const cH = new CoolHelperClass();
 const iDom = cH.iDom;
-iDom(iDom('.class'), 'ul'); //return DOMElement equal with document.queryselector('.class').queryselector('ul')
+iDom(iDom('.class'), 'ul'); //return DOMElement or null equal with document.queryselector('.class').queryselector('ul')
 ```
 
 Let's combine the query selector with the core element. Ultimately, we want to work with a single DOM element, so we will use the last index of the array.
@@ -77,8 +77,25 @@ Let's combine the query selector with the core element. Ultimately, we want to w
 ```javascript
 const cH = new CoolHelperClass();
 const iDom = cH.iDom;
-iDom(iDom('.class'), 'li', 2); //return DOMElement equal with document.queryselector('.class').queryselectorAll('li')[2]
+iDom(iDom('.class'), 'li', 2); //return DOMElement or null equal with document.queryselector('.class').queryselectorAll('li')[2]
 ```
+
+This function only serves the DRY principle.
+
+### iText
+
+This is where the little magic begins.
+This function relies on the iDom function but returns the innerText.
+If the element does not exist, it will return an empty string.
+You can call it in the same way as the iDom.
+
+```javascript
+const cH = new CoolHelperClass();
+iText('.class'); //return string almost equal with document.queryselector('.class').innerText
+
+```
+
+
 
 ## Personal Note
 
