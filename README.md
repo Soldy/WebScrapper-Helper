@@ -91,7 +91,7 @@ You can call it in the same way as the iDom.
 
 ```javascript
 const cH = new CoolHelperClass();
-iText('.class'); //return string almost equal with document.queryselector('.class').innerText
+cH.iText('.class'); //return string almost equal with document.queryselector('.class').innerText
 
 ```
 
