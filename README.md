@@ -74,7 +74,7 @@ iDom(iDom('.class'), 'ul'); //return DOMElement or null equal with document.quer
 > This is just an example and not the best one, because the query selector '.class ul' gives the same result.
 
 
-Let's combine the `querySelector` with the `querySelectorAll`. Ultimately, we want to work with a single DOM element, so we will use the last index of the array.
+Let's combine the `querySelector` with the `querySelectorAll`. Ultimately, we want to work with a single DOM element, so we will use the index of the `querySelectorAll` array at last.
 
 ```javascript
 const cH = new CoolHelperClass();
