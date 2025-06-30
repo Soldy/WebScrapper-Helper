@@ -71,6 +71,8 @@ const cH = new CoolHelperClass();
 const iDom = cH.iDom;
 iDom(iDom('.class'), 'ul'); //return DOMElement or null equal with document.queryselector('.class').queryselector('ul')
 ```
+> Please note that this is just an example and not the best one because the query selector '.class ul' gives the same result.
+
 
 Let's combine the query selector with the core element. Ultimately, we want to work with a single DOM element, so we will use the last index of the array.
 
