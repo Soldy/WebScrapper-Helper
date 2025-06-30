@@ -64,17 +64,17 @@ cH.iDom('.class'); //return DOMElement equal with document.queryselector('.class
 
 ```
 
-If the core element is not the document element that needs to be included, then simply start with the query selector string if the root element is the document.
+If the core element is not the document element that needs to be included.
 
 ```javascript
 const cH = new CoolHelperClass();
 const iDom = cH.iDom;
 iDom(iDom('.class'), 'ul'); //return DOMElement or null equal with document.queryselector('.class').queryselector('ul')
 ```
-> Please note that this is just an example and not the best one because the query selector '.class ul' gives the same result.
+> This is just an example and not the best one, because the query selector '.class ul' gives the same result.
 
 
-Let's combine the query selector with the core element. Ultimately, we want to work with a single DOM element, so we will use the last index of the array.
+Let's combine the `querySelector` with the `querySelectorAll`. Ultimately, we want to work with a single DOM element, so we will use the last index of the array.
 
 ```javascript
 const cH = new CoolHelperClass();
