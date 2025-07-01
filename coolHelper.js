@@ -223,11 +223,15 @@ const CoolHelperClass = class{
      * @todo cleanup
      *
      * @param {DOMElement}
-     * @param {Object.<string, string>}//{map<str,str>}
+     * @param {Object.<string, string>|string}//{map<str,str>|str}
      * @public
      * @return {string}
     **/
     iAttr(e_, select_){
+        if (typeof e_ === 'undefined')
+            return ;
+        if (typeof select_ === 'string')
+            return e_.getAttribute(select_);
         if ( typeof select_['e'] === 'undefined' )
              if ( typeof select_['element'] === 'string' ) {
                  select_['e'] = select_['element'];
@@ -240,7 +244,7 @@ const CoolHelperClass = class{
              } else if ( typeof select_['attribute'] === 'string' ) {
                  select_['a'] = select_['attribute'];
              } else {
-                 return '' 
+                 return '';
              }
         if ( typeof e_.querySelector === 'undefined' )
             return '';
