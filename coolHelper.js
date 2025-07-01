@@ -158,6 +158,23 @@ const CoolHelperClass = class{
     };
 
     /**
+     * Get value helper, and shortener.
+     *
+     * @param {DOMElement|string}
+     * @param {?string}
+     * @param {?number}
+     * @public
+     * @return {string}
+    **/
+    iVal(e_, select_, idx_){
+        const d = this.iDom(e_, select_, idx_);
+        if (typeof d === 'undefined' || d === null){
+            return '';
+        }
+        return this.trim(d.value);
+    };
+
+    /**
      *
      * @param {DOMElement}
      * @param {string} // @param {str}
