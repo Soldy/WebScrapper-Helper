@@ -66,7 +66,10 @@ const StorageHelperClass = class{
           (typeof GM !== 'undefined') &&
           (typeof GM.setValue === 'function') &&
           (typeof GM.getValue === 'function')
-        ) this.#type = 2;
+        ){
+            this.#type = 2;
+            return;
+        }
         if (
           (typeof localStorage !== 'undefined') &&
           (typeof localStorage.setItem === 'function') &&
