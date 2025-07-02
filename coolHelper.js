@@ -113,11 +113,11 @@ const CoolHelperClass = class{
             return '';
         let d = e_.querySelector(select_);
         if (typeof d === 'undefined' || d === null){
-            d = e_.getElementsByClassName(select_)[0];
+            return e_.getElementsByClassName(select_)[0];
         }
-        if (typeof idx_ === 'undefined'){
+        if (typeof idx_ !== 'undefined'){
             if (e_.querySelectorAll(select_).length > idx_){
-                d = e_.querySelectorAll(select_)[idx_];
+                return e_.querySelectorAll(select_)[idx_];
             }
         }
         return d;
