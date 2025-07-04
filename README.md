@@ -33,6 +33,17 @@ Compatible with [Greasemonkey](https://www.greasespot.net/) and [simple_scrapper
 <!-- It's undetectable for F5, Impreva, Cloudflare, DataDome, Reblaze, and Radware.
 However, if you do a volume scrapping they can catch you anyway.  -->
 
+
+# Why and AI
+
+The main issue that prompted this project is related to AI.
+While using AI to implement a scraper itself is not the problem,
+understanding what the AI is doing can be challenging. The AI can generate a
+unique JavaScript code that scrapes a website, and it usually gets the job done.
+However, the real difficulty for us as humans is spending time trying to comprehend how the code works.
+That's the reason why this tool implements a meta lang that is simple enough for understanding straight away. Use the same functions always.
+
+
 # lets start
 
 The WebScrapper Helper focuses on data mining before storing information, enhancing both visuals and learning experiences.
@@ -106,7 +117,7 @@ When u want to scrap fast, it is key to how many slave workers you have. A slave
 
 
 
-## Personal Note
+# Personal Note
 
 I built the WebScrapper Helper, and along with Anyserver, it the fourth most powerful web scraper I've developed on my own.
 (I've created three other scrapers that are more powerful, and I also collaborated with a team on even better projects.
