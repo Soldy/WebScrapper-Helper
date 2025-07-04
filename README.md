@@ -97,6 +97,13 @@ cH.iText('.class'); //return string almost equal with document.queryselector('.c
 
 ```
 
+## SwarmManager
+
+
+Swarm Manager is a multi-scrapper communication tool.
+When u want to scrap fast, it is key to how many slave workers you have. A slave can be a tab, a new browser process, a vm, or a separate machine.
+
+
 
 
 ## Personal Note
