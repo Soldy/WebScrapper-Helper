@@ -90,12 +90,13 @@ const stepHelperClass = class{
 
     /**
      *
+     * @param {sting|number}
      * @public
      * @async
     **/
     async safeStep(current_id_){
         const _org_id = await this.get();
-        if(current_id_ === _org_id)
+        if(current_id_ == _org_id)
             return this.#step((_org_id - 1).toString());
         this.#step(_org_id.toString());
     };
