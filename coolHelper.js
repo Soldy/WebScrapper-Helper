@@ -141,6 +141,22 @@ const CoolHelperClass = class{
     };
 
     /**
+     * Multiple and special innerText case handler, helper, and shortener.
+     * @param {DOMElement|string}
+     * @param {?string}
+     * @param {?number}
+     * @public
+     * @return {Array<string>}
+     **/
+     iTexta(e_, select_){
+         const out = [];
+         for (const i of e_.querySelectorAll(select_)){
+             out.push(this.trim(i.innerText));
+         }
+         return out;
+    };
+
+    /**
      * Multiple and special innerHTML case handler, helper, and shortener.
      *
      * @param {DOMElement|string}
