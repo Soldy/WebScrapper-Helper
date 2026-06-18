@@ -50,11 +50,11 @@ const CoolHelperClass = class{
     /**
      * trim function
      *
-     * @param {string}
+     * @param {string} [input_='']
      * @public
      * @return
     **/
-    trim(input_) {
+    trim(input_ = '') {
         return input_.replace(/^\s+|\s+$/g, '');
     }
 
