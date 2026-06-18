@@ -19,20 +19,21 @@ const ScrapperHelperClass = class{
     #log = this.#mT.log;
 
     /**
-     * @param {string} // @param {str}
+     * @param {string} url_ // @param {str}
+     * @param {boolean} [debug_=fasle] // @param {?bool=false}
      * @constructor
     **/
-    constructor(url_) {
+    constructor(url_, debug_ = false) {
         this.cH = new CoolHelperClass();
-        this.nH = new NetHelperClass(url_);
+        this.nH = new NetHelperClass(url_, debug_);
     }
 
     /**
      *
-     * @param {string}
-     * @param {Object.<string, string>} // @param {map<str,str>}
+     * @param {string} id_ // {str}
+     * @param {Object.<string, string>} data_ // {map<str,str>}
      * @public
-     * @returns {Object.<string, string>} // @return {map<str,str>}
+     * @returns {Object.<string, string>} // {map<str,str>}
     **/
     searchObject(id_, data_){
         let search = {};
@@ -44,7 +45,7 @@ const ScrapperHelperClass = class{
      *
      * @param {DOMElement}
      * @param {ScrapMeta}
-     * @param {string} // @param {str}
+     * @param {string} // {str}
      * @public
     **/
     async mineAndSave(e_, meta_, id_){
