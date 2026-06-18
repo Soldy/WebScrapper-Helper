@@ -50,11 +50,11 @@
  * @param {string}
  * @param {string}
  * @param {string}
- * @param {?CallMeta}
+ * @param {?CallMeta} 
+ * @param {boolean} [debug_=false]// {?bool=false}
  * @class
 **/
-const MinerHelperClass = function(element_, meta_, key_, url_, call_meta_){
-
+const MinerHelperClass = function(element_, meta_, key_, url_, call_meta_, debug_ = false){
     /**
      * Unnecessary public gate for the mine function.
      *
@@ -97,7 +97,7 @@ const MinerHelperClass = function(element_, meta_, key_, url_, call_meta_){
         };
 
     /** @type {ScrapperHelperClass} **/
-    const _sH = new ScrapperHelperClass(url_);
+    const _sH = new ScrapperHelperClass(url_, debug_);
     /** @type {MinerToolClass} **/
     const _mT = new MinerToolClass('miner', 4000, 2000);
     /** @type {MinerToolClass.setRandOut} **/
