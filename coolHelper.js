@@ -26,18 +26,24 @@
 **/
 const CoolHelperClass = class{
     /**
+     * @type {Array.<string>}
+     * @private
+    **/
+    #no_titles = ['highlightTitles'];
+  
+    /**
      * @private
     **/
     #scrollDown(){
         window.scrollTo(0, document.body.scrollHeight);
-    }
+    };
 
     /**
      * @private
     **/
     #scrollUp(){
         window.scrollTo(0, 0);
-    }
+    };
 
     /**
      * @private
@@ -45,18 +51,18 @@ const CoolHelperClass = class{
     #scrollDownUp(){
         setTimeout(this.#scrollDown, 100);
         setTimeout(this.#scrollUp, 200);
-    }
+    };
 
     /**
      * trim function
      *
      * @param {string} [input_='']
      * @public
-     * @return
+     * @returns
     **/
     trim(input_ = '') {
         return input_.replace(/^\s+|\s+$/g, '');
-    }
+    };
 
     /**
      * @public
@@ -64,25 +70,25 @@ const CoolHelperClass = class{
     scroll(){
         this.#scrollDownUp();
         setTimeout(this.#scrollDownUp, 1000);
-    }
+    };
 
     /**
      *
      * @param {DOMElement|string}
      * @public
-     * @return {DOMElement}
+     * @returns {DOMElement}
     **/
     elementCheck(e_){
         if (typeof e_ !== 'string')
             return e_;
         return document.querySelector(e_);
-    }
+    };
 
     /**
      *
      * @param {DOMElement}
      * @public
-     * @return {Array.<string>}
+     * @returns {Array.<string>}
     **/
     smartList(e_){
         if (e_.tagName.toLowerCase() !== 'ul')
@@ -92,7 +98,7 @@ const CoolHelperClass = class{
         for (const point of points)
             out.push(point.innerText);
         return out;
-    }
+    };
 
     /**
      * iDom mostly a query selector short hand and
@@ -102,7 +108,7 @@ const CoolHelperClass = class{
      * @param {?string}
      * @param {?number}
      * @public
-     * @return {DOMElement|null}
+     * @returns {DOMElement|null}
     **/
     iDom(e_, select_, idx_){
         if (typeof select_ === 'undefined'){
@@ -130,7 +136,7 @@ const CoolHelperClass = class{
      * @param {?string}
      * @param {?number}
      * @public
-     * @return {string}
+     * @returns {string}
     **/
     iText(e_, select_, idx_){
         const d = this.iDom(e_, select_, idx_);
@@ -146,7 +152,7 @@ const CoolHelperClass = class{
      * @param {?string}
      * @param {?number}
      * @public
-     * @return {Array<string>}
+     * @returns {Array<string>}
      **/
      iTexta(e_, select_){
          const out = [];
@@ -163,7 +169,7 @@ const CoolHelperClass = class{
      * @param {?string}
      * @param {?number}
      * @public
-     * @return {string}
+     * @returns {string}
     **/
     iHtml(e_, select_, idx_){
         const d = this.iDom(e_, select_, idx_);
@@ -180,7 +186,7 @@ const CoolHelperClass = class{
      * @param {?string}
      * @param {?number}
      * @public
-     * @return {string}
+     * @returns {string}
     **/
     iVal(e_, select_, idx_){
         const d = this.iDom(e_, select_, idx_);
@@ -195,7 +201,7 @@ const CoolHelperClass = class{
      * @param {DOMElement}
      * @param {string} // @param {str}
      * @public
-     * @return {Object.<string. string>} // {map<str, str>}
+     * @returns {Object.<string. string>} // {map<str, str>}
     **/
     iTerm(e_, term_, detail_){
         const terms = e_.querySelectorAll(term_);
@@ -215,7 +221,7 @@ const CoolHelperClass = class{
      * @param {string} // @param {str}
      * @param {number} // @param {uint16_t}
      * @public
-     * @return {Object.<string. string|Array.<string|Array.<string>>>} // {map<str, str|vector<str|vector<str>>>}
+     * @returns {Object.<string. string|Array.<string|Array.<string>>>} // {map<str, str|vector<str|vector<str>>>}
     **/
     iSection(e_, title_, i_){
         const parent_e = e_[i_].parentElement;
@@ -258,7 +264,7 @@ const CoolHelperClass = class{
      * @param {DOMElement}
      * @param {Object.<string, string>|string}//{map<str,str>|str}
      * @public
-     * @return {string}
+     * @returns {string}
     **/
     iAttr(e_, select_){
         if (typeof e_ === 'undefined')
@@ -299,7 +305,7 @@ const CoolHelperClass = class{
      * @param {DOMElement}
      * @param {ScrapMetaPiece}
      * @public
-     * @return {string | Object.<string, string>} // {str | map<str, str>}
+     * @returns {string | Object.<string, string>} // {str | map<str, str>}
     **/
     iSmart(e_, select_){
         if ( Array.isArray(select_) ){
@@ -334,15 +340,87 @@ const CoolHelperClass = class{
 
     /**
      *
+     * //@prompt Separate the title bullshit 
+     *     to a function and remove the last ':' if there
+     *
+     * @param {string}// {str}
+     * @public
+     * @returns {string}// {str}
+    **/
+    iTitleCleaner(title_){
+        if (title_.slice(-1) == ':')
+            return title_.slice(0,title_.length-1);
+        return title_;
+    }
+
+    /**
+     *
+     * //@prompt detect an element <some><strong>title<strong>value<some>
+     * 
+     * @param {<DOMElement>}
+     * @public
+     * @returns {Object.<string, string>} // {map<str, str>}
+    **/
+    iHighlightTitle(element_){
+       const out = {}
+       const full = element_.textContent;
+       const title_element = element_.getElementsByTagName('strong');
+       if (title_element.length != 1)
+           return out;
+       const title = title_element[0].textContent;
+       out[this.iTitleCleaner(title)] = full.replace(
+         title,
+         ''
+       );
+       return out;
+    };
+
+    /**
+     *
+     * //@prompt detect an element <some><strong>title<strong>value<some>
+     * 
+     * @param {DOMElement}
+     * @param {Array.<string>}// {vector<str>}
+     * @public
+     * @returns {Object.<string, string>}// {map<str, str>}
+    **/
+    iHighlightTitles(e_, element_){
+       const out = {};
+       // @prompt merge with for not with new map to not stress the garbage collector
+       for (const elements of element_){
+           if (typeof e_.querySelectorAll === 'undefined')
+               continue;
+           for (const element of e_.querySelectorAll(elements)){
+               const extra = this.iHighlightTitle(element);
+               for (const i in extra)
+                   out[i] = extra[i];
+           }
+       }
+       return out;
+    }
+
+    /**
+     *
      * @param {DOMElement}
      * @param {ScrapMeta}
      * @public
-     * @return {Object.<string, string | Object.<string, string>>} // {map<str, str | map<str, str>>}
+     * @returns {Object.<string, string | Object.<string, string>>} // {map<str, str | map<str, str>>}
     **/
     iTexts(e_, selects_){
-        const out = {};
-        for (const i in selects_)
+        let out = {};
+        if (typeof selects_['highlightTitles'] !== 'undefined'){
+            if (typeof selects_['highlightTitles']  === 'string')
+                selects_['highlightTitles'] = [selects_['highlightTitles']];
+            out = this.iHighlightTitles(
+                e_,
+                selects_['highlightTitles']
+            );
+        }
+        for (const i in selects_){
+            if (this.#no_titles.indexOf(i) != -1)
+                continue;
             out[i] = this.iSmart(e_, selects_[i]);
+        }
         return out;
     }
 
@@ -351,23 +429,30 @@ const CoolHelperClass = class{
      * @param {Array.<DOMElement> | string} // {str|vector<DOMElement>}
      * @param {ScrapMeta}
      * @public
-     * @return {Array.<Object.<string, string | Object.<string, string>>>} // {vector<map<str, str | map<str, str>>>}
+     * @returns {Array.<Object.<string, string | Object.<string, string>>>} // {vector<map<str, str | map<str, str>>>}
     **/
     iTextss(e_, selects_){
         const out = [];
         // make it work with DOMElement and string
+        
         if (typeof e_ === 'string')
             e_ = document.querySelectorAll(e_);
         for (const i in e_){
             const res = this.iTexts(e_[i], selects_);
+            const extra = {};
+            let do_it = false;
             for (const v in res)
                 // No point in sending an empty element.
                 // So if all variables are empty
                 // we do not attache it.
                 if ( res[v] !== ''){
-                    out.push(res);
-                    break;
+                    console.log(typeof v);
+                    extra[v.toString()] = res[v];
+                    do_it = true;
                 }
+            if (do_it)
+                out.push(extra);
+            
         }
         return out;
     };
@@ -409,6 +494,10 @@ const CoolHelperClass = class{
         let serial = 0;
         e_ = this.elementCheck(e_);
         for(const i of elements){
+            if (e_ === null){
+                console.log('Smart click failed');
+                return;
+            }
             const ne = e_.getElementsByTagName(i);
             if (
                 (typeof ne != 'undefined') &&
